@@ -12,11 +12,14 @@ from numpy.linalg import norm
 # pixel = image[200, 250]
 
 image = cv2.imread("Bild.jpg")
+#b,g,r = cv2.split(image)
 
 
 def unique_count_app(a):
     colors, count = np.unique(a.reshape(-1,a.shape[-1]), axis=0, return_counts=True)
     return colors[count.argmax()]
+
+
 dominant_color = unique_count_app(image)
 
 #average brightness of an image
