@@ -13,11 +13,11 @@ from numpy.linalg import norm
 
 image = cv2.imread("Bild.jpg")
 
-#dominant_color = unique_count_app(image)
+
 def unique_count_app(a):
     colors, count = np.unique(a.reshape(-1,a.shape[-1]), axis=0, return_counts=True)
     return colors[count.argmax()]
-
+dominant_color = unique_count_app(image)
 
 #average brightness of an image
 def brightnesszwischenwert(img):
@@ -38,7 +38,10 @@ sharpnesszwischenwert = cv2.Laplacian(img_grey, cv2.CV_64F).var()#
 sharpness = round((max(300, min(1500,sharpnesszwischenwert))-300)*(127/1200))
 contrast = round(max(0, min(127,contrastzwischenwert)))
 
-print("dominant_color: "+str(unique_count_app(image)))
+for i in range(0,len(dominant_color)):
+    dominant_color[i] = round(dominant_color[i]*(127/255)) 
+
+print("dominant_color: "+str(dominant_color))
 print("brightness: "+str(brightness))
 print("contrast: "+str(contrast))
 print("saturation: "+str(saturation))
