@@ -19,6 +19,35 @@ def unique_count_app(a):
     colors, count = np.unique(a.reshape(-1,a.shape[-1]), axis=0, return_counts=True)
     return colors[count.argmax()]
 
+<<<<<<< HEAD
+=======
+def Werte_printen():
+    result, image = camera.read()
+    height, width = frame.shape[:2]
+    dominant_color = most_common_color_name(image)
+    brightness = round(brightnesszwischenwert(image)*(127/255))
+    img_grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    contrastzwischenwert = img_grey.std()
+    img_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    saturationzwischenwert = img_hsv[:, :, 1].mean()
+    saturation = round(saturationzwischenwert*(127/255))
+    sharpnesszwischenwert = cv2.Laplacian(img_grey, cv2.CV_64F).var()
+    sharpness = round(np.clip((sharpnesszwischenwert / 1000) * 127, 1, 127))
+    contrast = round(max(0, min(127,contrastzwischenwert)))
+    print("-----------------------------")
+    print("nächstes Bild")
+    client.send_message('/bilddaten', f"dominant_color:{str(dominant_color)}")
+    print(f"dominant_color:{str(dominant_color)}")
+    client.send_message('/bilddaten', f"brightness:{str(brightness)}")
+    print(f"brightness:{str(brightness)}")
+    client.send_message('/bilddaten', f"contrast:{str(contrast)}")
+    print(f"contrast:{str(contrast)}")
+    client.send_message('/bilddaten', f"saturation:{str(saturation)}")
+    print(f"saturation:{str(saturation)}")
+    client.send_message('/bilddaten', f"sharpness:{str(sharpness)}")
+    print(f"sharpness:{str(sharpness)}")
+
+>>>>>>> e7d0972395c17105ed378a79e17b9e6706e95ca4
 
 dominant_color = unique_count_app(image)
 
