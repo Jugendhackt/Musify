@@ -21,7 +21,7 @@ client = udp_client.SimpleUDPClient(ip, port)
 
 midiout = rtmidi.MidiOut()
 available_ports = midiout.get_ports()
-print(available_ports)
+print(available_ports)#
 
 if available_ports:
     midiout.open_port(1) # loopMIDI Port 1 (zweiter Port im Array)
@@ -101,19 +101,19 @@ def Werte_printen():
     contrast = round(max(0, min(127,contrastzwischenwert)))
     print("______________________")
     client.send_message('/bilddaten', f"dominant_color:{str(dominant_color)}")
-    # midiout.send_message([0xB0, MIDI_CC_23, dominant_color])
+    #midiout.send_message([0xB0, MIDI_CC_23, dominant_color])
     print(f"dominant_color:{str(dominant_color)}")
     client.send_message('/bilddaten', f"brightness:{str(brightness)}")
-    midiout.send_message([0xB0, MIDI_CC_24, brightness])
+    #midiout.send_message([0xB0, MIDI_CC_24, brightness])
     print(f"brightness:{str(brightness)}")
     client.send_message('/bilddaten', f"contrast:{str(contrast)}")
-    midiout.send_message([0xB0, MIDI_CC_25, contrast])
+   # midiout.send_message([0xB0, MIDI_CC_25, contrast])
     print(f"contrast:{str(contrast)}")
     client.send_message('/bilddaten', f"saturation:{str(saturation)}")
-    midiout.send_message([0xB0, MIDI_CC_26, saturation])
+    #midiout.send_message([0xB0, MIDI_CC_26, saturation])
     print(f"saturation:{str(saturation)}")
     client.send_message('/bilddaten', f"sharpness:{str(sharpness)}")
-    midiout.send_message([0xB0, MIDI_CC_37, sharpness])
+    #midiout.send_message([0xB0, MIDI_CC_37, sharpness])
     print(f"sharpness:{str(sharpness)}")
 
 while True:

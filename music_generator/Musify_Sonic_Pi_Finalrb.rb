@@ -12,7 +12,7 @@ vvol = 1 #Lautstärke
 variante7= :minor7
 variante3= :minor
 
-OSCverbindung = "/osc:192.168.118.104:61922/bilddaten"
+OSCverbindung = "/osc:127.0.0.1:57220/bilddaten"
 
 besetzung = :piano
 

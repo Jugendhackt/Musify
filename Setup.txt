@@ -1,0 +1,8 @@
+1. Sonic Pi installieren
+2. Python installieren
+3. Die beiden Dateien öffnen
+4. In Sonic Pi unter I/O, Erlaube OSC von anderen Computern = True
+5. In Sonic Pi unter I/O, OSC Port mit Port in Python vergleichen (zur Not in Python anpassen)
+6. Python Programm starten
+7. In Sonic Pi unten rechts in Signalen die Zeile von "/osc: …" bis "/bilddaten" im Code als OSCverbindung festlegen
+8. Sonic Pi starten
