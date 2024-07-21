@@ -2,12 +2,12 @@ use_bpm 120
 set :beat, 2
 set :geschwindigkeit, 3
 set :a, 127
-set :lautstärke, 1
+set :lautstaerke, 1
 set :previous_cc_value, get[:a]
 
 #Geschwindigkeit = DRIVE
 #Noten = Tasten
-#Lautstärke = VCO2 Shape
+#Lautstaerke = VCO2 Shape
 #Beats = LFO Rate
 
 live_loop :midi_piano do
@@ -51,7 +51,7 @@ live_loop :abfragen do
     end
   end
   if (cc == 37) #Korg Monolog VCO2 Shape
-    set :lautstärke, value / 127.0
+    set :lautstaerke, value / 127.0
   end
 end
 live_loop :osc_debug do
@@ -60,40 +60,40 @@ live_loop :osc_debug do
   puts msg
 end
 define :play_beat_1 do
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_snare_hard, amp: get[:lautstärke]
+  sample :drum_snare_hard, amp: get[:lautstaerke]
   sleep 1
 end
 define :play_beat_2 do
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.25
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.25
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.25
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.25
-  sample :drum_snare_hard, amp: get[:lautstärke]
+  sample :drum_snare_hard, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_snare_hard, amp: get[:lautstärke]
+  sample :drum_snare_hard, amp: get[:lautstaerke]
   sleep 0.5
 end
 define :play_beat_3 do
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_snare_hard, amp: get[:lautstärke]
+  sample :drum_snare_hard, amp: get[:lautstaerke]
   sleep 1
 end
 define :play_beat_4 do
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_heavy_kick, amp: get[:lautstärke]
+  sample :drum_heavy_kick, amp: get[:lautstaerke]
   sleep 0.5
-  sample :drum_snare_hard, amp: get[:lautstärke]
+  sample :drum_snare_hard, amp: get[:lautstaerke]
   sleep 1
 end
