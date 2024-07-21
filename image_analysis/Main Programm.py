@@ -26,8 +26,6 @@ KNOWN_COLORS = {
     'green': (0, 255, 0),
     'blue': (255, 0, 0),
     'yellow': (0, 255, 255),
-    'cyan': (255, 255, 0),
-    'magenta': (255, 0, 255),
 }
 
 known_colors_rgb = np.array(list(KNOWN_COLORS.values()))
