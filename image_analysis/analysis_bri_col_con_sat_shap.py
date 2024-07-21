@@ -81,11 +81,19 @@ def Werte_printen():
     sharpnesszwischenwert = cv2.Laplacian(img_grey, cv2.CV_64F).var()
     sharpness = round(np.clip((sharpnesszwischenwert / 1000) * 127, 1, 127))
     contrast = round(max(0, min(127,contrastzwischenwert)))
+    print("-----------------------------")
+    print("nächstes Bild")
     client.send_message('/bilddaten', f"dominant_color:{str(dominant_color)}")
+    print(f"dominant_color:{str(dominant_color)}")
     client.send_message('/bilddaten', f"brightness:{str(brightness)}")
+    print(f"brightness:{str(brightness)}")
     client.send_message('/bilddaten', f"contrast:{str(contrast)}")
+    print(f"contrast:{str(contrast)}")
     client.send_message('/bilddaten', f"saturation:{str(saturation)}")
+    print(f"saturation:{str(saturation)}")
     client.send_message('/bilddaten', f"sharpness:{str(sharpness)}")
+    print(f"sharpness:{str(sharpness)}")
+
 
 while True:
     timeout = time.time() + 5   # 5 minutes from now
