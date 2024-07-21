@@ -16,6 +16,24 @@ ip = socket.gethostbyname(socket.gethostname())
 port = 4560
 client = udp_client.SimpleUDPClient(ip, port)
 
+
+# Midi Client
+
+midiout = rtmidi.MidiOut()
+available_ports = midiout.get_ports()
+print(available_ports)
+
+if available_ports:
+    midiout.open_port(1) # loopMIDI Port 1 (zweiter Port im Array)
+else:
+    midiout.open_virtual_port("My virtual output")
+
+MIDI_CC_23 = 23
+MIDI_CC_24 = 24
+MIDI_CC_25 = 25
+MIDI_CC_26 = 26
+MIDI_CC_37 = 37
+
 camera = cv2.VideoCapture(0)#b,g,r = cv2.split(image)
 import math
 
@@ -83,10 +101,21 @@ def Werte_printen():
     contrast = round(max(0, min(127,contrastzwischenwert)))
     print("______________________")
     client.send_message('/bilddaten', f"dominant_color:{str(dominant_color)}")
+    # midiout.send_message([0xB0, MIDI_CC_23, dominant_color])
+    print(f"dominant_color:{str(dominant_color)}")
     client.send_message('/bilddaten', f"brightness:{str(brightness)}")
+    midiout.send_message([0xB0, MIDI_CC_24, brightness])
+    print(f"brightness:{str(brightness)}")
     client.send_message('/bilddaten', f"contrast:{str(contrast)}")
+    midiout.send_message([0xB0, MIDI_CC_25, contrast])
+    print(f"contrast:{str(contrast)}")
     client.send_message('/bilddaten', f"saturation:{str(saturation)}")
+    midiout.send_message([0xB0, MIDI_CC_26, saturation])
+    print(f"saturation:{str(saturation)}")
     client.send_message('/bilddaten', f"sharpness:{str(sharpness)}")
+    midiout.send_message([0xB0, MIDI_CC_37, sharpness])
+    print(f"sharpness:{str(sharpness)}")
+
 while True:
     timeout = time.time() + 5   # 5 minutes from now
     #cv2.imshow('image',image)
