@@ -50,7 +50,7 @@ def sort_hsvs(hsv_list):
 
 
 # START HERE
-img_original = cv2.imread('C:/Users/janwi/OneDrive/Desktop/trainyard.jpg')
+img_original = cv2.imread('C:/Users/janwi/OneDrive/Desktop/flag.jpg')
 down_points = (200,200)
 img = cv2.resize(img_original, down_points, interpolation= cv2.INTER_LINEAR)
 height, width, _ = np.shape(img)
@@ -58,7 +58,7 @@ height, width, _ = np.shape(img)
 # reshape the image to be a simple list of RGB pixels
 image = img.reshape((height * width, 3))
 # we'll pick the 5 most common colors
-num_clusters = 8
+num_clusters = 5
 clusters = KMeans(n_clusters=num_clusters)
 clusters.fit(image)
 # count the dominant colors and put them in "buckets"
@@ -71,33 +71,30 @@ combined = sorted(combined, key=lambda x: x[0], reverse=True)
 bars = []
 hsv_values = []
 rgb_values = []
+h_val = []
 for index, rows in enumerate(combined):
     bar, rgb, hsv = make_bar(100, 100, rows[1])
     #print(f'Bar {index + 1}')
     #print(f'  RGB values: {rgb}')
     #print(f'  HSV values: {hsv}')
     hsv_values.append(hsv)
+    if hsv[0] < 255/2:
+        h_val.append(hsv[0])
+    else:
+        h_val.append(round(hsv[0]-255/2))
     rgb_values.append(rgb)
     bars.append(bar)
 
 #------ CUSTOM CODE STARTS HERE -------
-
-min_dists = []
-hsv_values_fix = []
-for i,v in enumerate(hsv_values):
-    if v[0] < 255/2:
-        hsv_values_fix.append(v)
-    else:
-        hsv_values_fix.append((round(v[0]-255/2),v[1],v[2]))
-for i, test in enumerate(hsv_values_fix):
-    minimum_distance = 10000
-    for j, comp in enumerate(hsv_values_fix):
-        if i != j:
-            minimum_distance = min(minimum_distance,abs(test[0]-comp[0]))
-    min_dists.append(minimum_distance)
-error = sum(min_dists)/len(min_dists)
-error = np.clip(error, 0, 127)
-print("Linear Distance Term of color balance (simple difference): "+str(error))
+h_val = list(set(h_val))
+h_val.sort()
+span = 0
+for i in range(0,len(h_val)-1):
+    span += abs(h_val[i+1] - h_val[i])
+span += abs(h_val[-1] - h_val[0])
+span = 2.5*(span/(len(hsv_values)))
+span = np.clip(span, 0, 127)
+print("Simple hue-distance separation of dominant color: "+str(span))
 
 # sort the bars[] list so that we can show the colored boxes sorted
 # by their HSV values -- sort by hue, then saturation
