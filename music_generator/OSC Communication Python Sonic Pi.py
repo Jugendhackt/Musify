@@ -1,6 +1,7 @@
 from pythonosc import udp_client
+import socket
 
-ip = "172.16.185.26"
+ip = socket.gethostbyname(socket.gethostname())
 #unter I/O lokale ip adresse
 port = 4560
 #unter I/O osc port, beides in sonic pi
